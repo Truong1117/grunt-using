@@ -1,0 +1,44 @@
+# Link: https://devdocs.magento.com/guides/v2.4/frontend-dev-guide/tools/using_grunt.html
+
+# Installing and configuring Grunt
+Magento has built-in Grunt tasks configured, but there are still several steps you need to take to be able to use it:
+
+1. Install node.js to any location on your machine.
+
+2. Install Grunt CLI tool globally. To do this, run the following command in a command prompt:
+  $ npm install -g grunt-cli
+  
+3. From the <Magento_root> directory, copy and paste the contents of the following files:
+  $ package.json.sample into package.json
+  $ Gruntfile.js.sample into Gruntfile.js
+  $ grunt-config.json.sample into grunt-config.json
+  
+4. Install (or refresh) the node.js project dependency, including Grunt, for your Magento instance. To do this, run the following commands in a command prompt:
+  $ cd your_Magento_instance_directory
+  $ npm install
+  $ npm update
+  
+5. (Optional) If you want to use Grunt for “watching” changes automatically, without reloading pages in a browser each time, install the LiveReload extension in your browser.
+
+# Grunt configuration file
+Copy the contents of themes.js into local-themes.js in the dev/tools/grunt/configs/ directory.
+
+If installed as described above, Grunt will use the default configuration files located in the dev/tools/grunt/configs/ directory. You can define your theme in the local-themes.js file. The following shows an example of how you can define your theme.
+
+<theme>: {
+  area: '<area>',
+  name: '<Vendor>/<theme>,
+  locale: '<language>',
+  files: [
+    '<path_to_file1>', //path to root source file
+    '<path_to_file2>'
+  ],
+dsl: 'less'
+}
+
+# Using custom Grunt configuration files
+
+1. grunt clean: 	Removes the theme related static files in the pub/static and var directories.
+2. grunt exec:<theme> - grunt exec	Republishes symlinks to the source files to the pub/static/frontend/ directory. Use grunt exec:<theme> to republish symlinks for a specific theme.
+3. grunt less:<theme> - grunt less	Compiles CSS files using the symlinks published in the pub/static/frontend/ directory. Use grunt less:<theme> to use the symlinks published for a specific theme.
+4. grunt watch - Tracks the changes in the source files, recompiles .css files, and reloads the page in the browser.
